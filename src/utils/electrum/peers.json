@@ -24,5 +24,19 @@
   "litecoinTestnet": [
     {"host": "electrum-ltc.bysh.me", "ssl": 51002, "tcp": 51001},
     {"host": "electrum.ltc.xurious.com", "ssl": 51002, "tcp": 51001}
+  ],
+  "baricoin": [
+    {"host": "baricoin.clear-net.jp", "ssl": 50002, "tcp": 50001}
+  ],
+  "fujicoin": [
+      {"host": "electrumx1.fujicoin.org", "ssl": 50002, "tcp": 50001},
+      {"host": "electrumx2.fujicoin.org", "ssl": 50002, "tcp": 50001}
+  ],
+  "monacoin": [
+    {"host": "electrumx.tamami-foundation.org", "ssl": 50002, "tcp": 50001},
+    {"host": "electrumx3.monacoin.nl", "ssl": 50002, "tcp": 50001},
+    {"host": "102.67.136.247", "ssl": 50002, "tcp": 50001},
+    {"host": "103.125.218.246", "ssl": 50002, "tcp": 50001},
+    {"host": "133.167.67.203", "ssl": 50002, "tcp": 50001}
   ]
 }

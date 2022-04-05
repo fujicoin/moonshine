@@ -159,6 +159,8 @@ class TransactionDetail extends PureComponent {
 		if (selectedCrypto === "bitcoinTestnet") url = `https://blockstream.info/testnet/block-height/${block}`;
 		if (selectedCrypto === "litecoin") url = `https://chain.so/block/LTC/${block}`;
 		if (selectedCrypto === "litecoinTestnet") url = `https://chain.so/block/LTC/${block}`;
+		if (selectedCrypto === "fujicoin") url = `https://explorer.fujicoin.org/block/${block}`;
+		if (selectedCrypto === "monacoin") url = `https://blockbook.electrum-mona.org/block/${block}`;
 		openUrl(url);
 	};
 	
@@ -169,6 +171,8 @@ class TransactionDetail extends PureComponent {
 		if (selectedCrypto === "bitcoinTestnet") url = `https://blockstream.info/testnet/address/${address}`;
 		if (selectedCrypto === "litecoin") url = `https://chain.so/address/LTC/${address}`;
 		if (selectedCrypto === "litecoinTestnet") url = `https://chain.so/address/LTCTEST/${address}`;
+		if (selectedCrypto === "fujicoin") url = `https://explorer.fujicoin.org/address/${address}`;
+		if (selectedCrypto === "monacoin") url = `https://blockbook.electrum-mona.org/address/${address}`;
 		openUrl(url);
 	};
 	
@@ -187,6 +191,12 @@ class TransactionDetail extends PureComponent {
 				break;
 			case "litecoinTestnet":
 				url = `https://chain.so/tx/LTCTEST/${tx}`;
+				break;
+			case "fujicoin":
+				url = `https://explorer.fujicoin.org/tx/${tx}`;
+				break;
+			case "monacoin":
+				url = `https://blockbook.electrum-mona.org/tx/${tx}`;
 				break;
 			default:
 				return;

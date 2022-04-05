@@ -1094,7 +1094,7 @@ class SendTransaction extends Component {
 							thumbTintColor={colors.white}
 							minimumTrackTintColor={colors.lightPurple}
 							maximumValue={this.props.transaction.maximumFee}
-							minimumValue={1}
+							minimumValue={this.props.transaction.recommendedFee}
 							value={!this.state.cryptoBalance ? 0 : Number(this.props.transaction.fee) || Number(this.props.transaction.recommendedFee)}
 						/>
 					</View>

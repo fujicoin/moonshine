@@ -26,43 +26,33 @@ Recommended fees are always grossly overestimated.
 Until this is resolved, getRecommendedFee divides that estimation by 4.
  */
 export const getRecommendedFee = ({ coin = "bitcoin", transactionSize = 256 } = {}) => (dispatch) => {
-	const DIVIDE_RECOMMENDED_FEE_BY = 10;
-	const MAX_FEE_MULTIPLIER = 4;
-	return new Promise(async (resolve) => {
+    return new Promise(async (resolve) => {
+        let recommendedFee = 1; //add each coins fee. if same as bitcoin(or lightning), doesn't have to.
+        switch (coin) {
+            case "bitcoin":
+                recommendedFee = 4;
+                break;
+            case "fujicoin":
+                recommendedFee = 10000;
+                break;
+            case "baricoin":
+                recommendedFee = 10000;
+                break;
+            default:
+                break;
+        }
+        let maximumFee = recommendedFee * 10;
 
-		const failure = (errorTitle = "", errorMsg = "") => {
-			resolve({ error: true, errorTitle, errorMsg });
-		};
-
-		let recommendedFee = 4;
-		let maximumFee = 128;
-		try {
-			const feeResponse = await walletHelpers.feeEstimate.default({ selectedCrypto: coin });
-			if (!feeResponse.data.error && feeResponse.data > 0) {
-				let feeInSats = bitcoinUnits(feeResponse.data, "BTC").to("satoshi").value();
-				feeInSats = Math.round(feeInSats / transactionSize);
-				try {recommendedFee = Math.round(feeInSats / DIVIDE_RECOMMENDED_FEE_BY);} catch (e) {}
-				if (recommendedFee < 1) recommendedFee = 4;
-			}
-			try {
-				const suggestedMaximumFee = recommendedFee * MAX_FEE_MULTIPLIER;
-				if (suggestedMaximumFee > maximumFee) maximumFee = suggestedMaximumFee;
-			} catch (e) {}
-		} catch (e) {
-			console.log(e);
-			failure();
-		}
-		if (recommendedFee < 1) recommendedFee = 1;
-		const feeTimestamp = moment().format();
-		const data = {
-			recommendedFee,
-			maximumFee,
-			feeTimestamp
-		};
-		dispatch({
-			type: actions.UPDATE_TRANSACTION,
-			payload: data
-		});
+        const feeTimestamp = moment().format();
+        const data = {
+            recommendedFee,
+            maximumFee,
+            feeTimestamp
+        };
+        dispatch({
+            type: actions.UPDATE_TRANSACTION,
+            payload: data
+        });
 
 		resolve({ error: false, data });
 	});

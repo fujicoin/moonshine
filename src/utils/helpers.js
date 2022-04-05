@@ -439,6 +439,7 @@ const createTransaction = ({ address = "", transactionFee = 2, amount = 0, confi
 			const seed = bip39.mnemonicToSeedSync(mnemonic, bip39Passphrase);
 			const root = bip32.fromSeed(seed, network);
 			const psbt = new bitcoin.Psbt({ network });
+			psbt.setMaximumFeeRate(1000000);
 
 			//Add Inputs
 			const utxosLength = utxos.length;
@@ -700,6 +701,8 @@ const openTxId = (txid = "", selectedCrypto = ""): void => {
 	if (selectedCrypto === "bitcoinTestnet") url = `https://blockstream.info/testnet/tx/${txid}`;
 	if (selectedCrypto === "litecoin") url = `https://chain.so/tx/LTC/${txid}`;
 	if (selectedCrypto === "litecoinTestnet") url = `https://chain.so/tx/LTCTEST/${txid}`;
+	if (selectedCrypto === "fujicoin") url = `https://explorer.fujicoin.org/tx/${txid}`;
+	if (selectedCrypto === "monacoin") url = `https://blockbook.electrum-mona.org/tx/${txid}`;
 	openUrl(url);
 };
 
