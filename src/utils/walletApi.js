@@ -235,7 +235,7 @@ const electrumHistoryHelper = async ({ allAddresses = [], addresses = [], change
 
 							//Ensure that none of the input addresses came from this wallet.
 							try {
-								if (vout.scriptPubKey.addresses.includes(tx.address)) {
+								if ((vout.scriptPubKey.addresses || vout.scriptPubKey.address).includes(tx.address)) {
 									isInputMatch = true;
 									inputAddressMatch = true;
 								}
@@ -243,7 +243,7 @@ const electrumHistoryHelper = async ({ allAddresses = [], addresses = [], change
 							if (!inputAddressMatch) {
 								await Promise.all(combinedAddresses.map(({ address }) => {
 									try {
-										if (vout.scriptPubKey.addresses.includes(address)) {
+										if ((vout.scriptPubKey.addresses || vout.scriptPubKey.address).includes(address)) {
 											isInputMatch = true;
 											inputAddressMatch = true;
 										}
@@ -274,7 +274,7 @@ const electrumHistoryHelper = async ({ allAddresses = [], addresses = [], change
 							let nIndexIsUndefined = false;
 							try {
 								await Promise.all(combinedAddresses.map(({ address }) => {
-									if (output.scriptPubKey.addresses.includes(address)) {
+									if ((output.scriptPubKey.addresses || output.scriptPubKey.address).includes(address)) {
 										isOutputMatch = true;
 										outputAddressMatch = true;
 									}
